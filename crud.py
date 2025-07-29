@@ -1,7 +1,6 @@
 import sqlite3
 from db import create_connection
 from sqlite3 import Error
-# ---------------- USERS ----------------
 
 def get_users():
     conn = create_connection()
@@ -34,7 +33,6 @@ def create_user(username, email):
         conn.close()
 
 
-# ---------------- CATEGORIES ----------------
 
 def get_categories():
     conn = create_connection()
@@ -66,7 +64,6 @@ def create_category(category_name):
     finally:
         conn.close()
 
-# ---------------- ITEMS ----------------
 
 def get_items():
     conn = create_connection()
@@ -105,7 +102,6 @@ def create_item(item_name, category_id, unit):
     finally:
         conn.close()
 
-# ---------------- SHOPPING LISTS ----------------
 
 def get_user_shopping_lists(user_id):
     conn = create_connection()
@@ -160,7 +156,6 @@ def delete_shopping_list(list_id: int):
             conn.close()
 
 
-# ---------------- LIST ITEMS ----------------
 
 def get_list_items(list_id):
     conn = create_connection()
