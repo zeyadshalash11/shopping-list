@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Item</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Add Item to "{{ shopping_list.list_name }}"</h1>
+
+        <div class="mb-1">
+            <a href="/items/new">➕ Add New Item</a>
+        </div>
+
+        <form action="/lists/{{ shopping_list.list_id }}/items/add" method="post" class="card">
+            <label for="item_id">Select Item:</label>
+            <select name="item_id" id="item_id" required>
+                {% for item in items %}
+                <option value="{{ item.item_id }}">{{ item.item_name }} ({{ item.unit }})</option>
+                {% endfor %}
+            </select>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" step="0.01" min="0" required>
+
+            <div class="mt-1">
+                <button type="submit">Add Item</button>
+            </div>
+        </form>
+
+        <div class="mt-1">
+            <a href="/lists/{{ shopping_list.list_id }}/view">⬅ Back to List</a>
+        </div>
+    </div>
+</body>
+
+</html>

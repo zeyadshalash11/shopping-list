@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Item</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Item</h1>
+
+        <form action="/items/new" method="post" class="card">
+            <label for="item_name">Item Name:</label>
+            <input type="text" name="item_name" required>
+
+            <label for="unit">Unit:</label>
+            <input type="text" name="unit" placeholder="e.g., kg, pcs, pack" required>
+
+            <label for="category_id">Category:</label>
+            <select name="category_id" required>
+                {% for category in categories %}
+                    <option value="{{ category.category_id }}">{{ category.category_name }}</option>
+                {% endfor %}
+            </select>
+
+            <div class="mt-1">
+                <button type="submit">Add Item</button>
+            </div>
+        </form>
+
+        <div class="mt-1">
+            <a href="/">⬅ Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

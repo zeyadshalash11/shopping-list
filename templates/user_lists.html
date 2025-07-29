@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.username }}'s Shopping Lists</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ user.username }}'s Shopping Lists</h1>
+
+        <!-- Create New List Form -->
+        <section class="card mb-2">
+            <h2>Create New List</h2>
+            <form action="/users/{{ user.user_id }}/lists/add" method="post">
+                <label for="list_name">List Name:</label>
+                <input type="text" name="list_name" id="list_name" required>
+                <button type="submit">Create List</button>
+            </form>
+        </section>
+
+        <!-- Display Existing Shopping Lists -->
+        {% if shopping_lists %}
+        {% for lst in shopping_lists %}
+        <div class="card list-entry">
+            <div class="list-header">
+                <a href="/lists/{{ lst.list_id }}/view">
+                    <strong>{{ lst.list_name }}</strong>
+                </a>
+            </div>
+            <form action="/users/{{ user.user_id }}/lists/{{ lst.list_id }}/delete" method="post">
+                <button class="delete" type="submit">Delete</button>
+            </form>
+
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No shopping lists created yet.</p>
+        {% endif %}
+
+        <!-- Navigation -->
+        <div class="mt-2">
+            <a href="/">⬅ Back to all users</a>
+        </div>
+    </div>
+</body>
+
+</html>

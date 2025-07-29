@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ shopping_list.list_name }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ shopping_list.list_name }}</h1>
+
+        <div class="mb-1">
+            <a href="/lists/{{ shopping_list.list_id }}/items/add">➕ Add New Item</a>
+        </div>
+
+        {% for item in items %}
+            <div class="card {% if item.is_purchased %}purchased{% endif %}">
+                <strong>{{ item.item_name }}</strong> ({{ item.quantity }} {{ item.unit }})
+                <br>
+                <small>Category: {{ item.category_name }}</small>
+                <div class="mt-1">
+                    <form action="/list_items/{{ item.list_item_id }}/purchased/" method="post">
+                        <input type="hidden" name="is_purchased" value="{{ 'false' if item.is_purchased else 'true' }}">
+                        <button type="submit">
+                            {{ 'Unmark' if item.is_purchased else 'Mark as Purchased' }}
+                        </button>
+                    </form>
+
+                    <form action="/list_items/{{ item.list_item_id }}/delete/" method="post">
+                        <button type="submit" class="delete">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="mt-1">
+            <a href="/users/{{ user.user_id }}/lists/view">⬅ Back to {{ user.username }}'s Lists</a>
+        </div>
+    </div>
+</body>
+</html>

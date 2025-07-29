@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping List Manager</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Shopping List Manager</h1>
+
+        <h2>Select a User:</h2>
+        {% for user in users %}
+        <div class="card">
+            <a href="/users/{{ user.user_id }}/lists/view">
+                <strong>{{ user.username }}</strong> ({{ user.email }})
+            </a>
+            <form action="/users/{{ user.user_id }}/delete" method="post">
+                <button class="delete" type="submit">Delete User</button>
+            </form>
+
+        </div>
+        {% endfor %}
+
+        <h2>Add New User</h2>
+        <form action="/users/add" method="post" class="card">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+
+            <label for="email">Email:</label>
+            <input type="text" name="email" required>
+
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+</body>
+
+</html>
